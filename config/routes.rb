@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => {registrations: 'registrations'}
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
+  ## create only route for cutom methods inside users resource
+  namespace :users do
+      post 'login_user'
+  end
+  #resources :users, only: [:index, :new, :create]
+
+  match '/login_user' => 'users#login_user', :constraints => {:method => 'OPTIONS'}, via: [:options]
+
   root 'users#index'
 
   # Example of regular route:
