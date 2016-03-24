@@ -39,3 +39,7 @@ gem 'spring',        group: :development
 # gem 'debugger', group: [:development, :test]
 
 gem 'devise' # for login/signup
+gem 'carrierwave' # to upload file
+gem 'pry'
+gem 'execjs'
+gem 'therubyracer', :platforms => :ruby

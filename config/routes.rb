@@ -7,12 +7,14 @@ Rails.application.routes.draw do
 
   ## create only route for cutom methods inside users resource
   namespace :users do
-      post 'login_user'
+      get 'login_user'
   end
   #resources :users, only: [:index, :new, :create]
 
   match '/login_user' => 'users#login_user', :constraints => {:method => 'OPTIONS'}, via: [:options]
 
+  resources :classifieds#, :constraints => {:method => 'OPTIONS'}, via: [:options]
+  match '/classifieds/:id' => 'classifieds#update', :constraints => {:method => 'OPTIONS'}, via: [:options]
   root 'users#index'
 
   # Example of regular route:
