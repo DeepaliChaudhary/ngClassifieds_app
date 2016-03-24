@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   ## create only route for cutom methods inside users resource
   namespace :users do
-      get 'login_user'
+      post 'login_user'
   end
   #resources :users, only: [:index, :new, :create]
 
