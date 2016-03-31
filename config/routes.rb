@@ -13,9 +13,15 @@ Rails.application.routes.draw do
 
   match '/login_user' => 'users#login_user', :constraints => {:method => 'OPTIONS'}, via: [:options]
 
-  resources :classifieds#, :constraints => {:method => 'OPTIONS'}, via: [:options]
+  resources :classifieds do
+    member do 
+        delete 'delete_classified'
+    end
+  end
   match '/classifieds/:id' => 'classifieds#update', :constraints => {:method => 'OPTIONS'}, via: [:options]
+  match '/classifieds/:id/delete_classified' => 'classifieds#delete_classified', :constraints => {:method => 'OPTIONS'}, via: [:options]
   root 'users#index'
+
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

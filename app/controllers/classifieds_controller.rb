@@ -20,11 +20,8 @@ class ClassifiedsController < ApplicationController
     status = 'failed'
     begin
       classified_params = JSON.parse  params[:classified]
-      #classified_params['categories'] = JSON.parse classified_params['categories']
-      #classified_params['contact'] = JSON.parse classified_params['contact']
       @classified = Classified.new(classified_params)
       if @classified.save!
-        #redirect_to classifieds_path
         status = 'success'
       end
     rescue Exception => e
@@ -70,6 +67,18 @@ class ClassifiedsController < ApplicationController
       result = {status: 'success', classified: @updated_classified}
     end
     return result
+  end
+
+  def delete_classified
+    result = {status: 'failed'}
+    begin
+      @classified = Classified.find(params[:id])
+      if @classified.destroy
+        result[:status] = 'success'
+      end
+    rescue Exception => e
+    end
+    render :json => result
   end
 
   private
