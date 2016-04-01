@@ -46,7 +46,7 @@ class ClassifiedsController < ApplicationController
     classified_params['created_at'] = DateTime.parse(classified_params['created_at'])
     classified_params['updated_at'] = DateTime.parse(classified_params['updated_at'])
 
-    @classified = Classified.where(params[:id]).first
+    @classified = Classified.where(id: params[:id]).first
     result = update_classified(classified_params)    
     
     render :json => result    
@@ -63,7 +63,7 @@ class ClassifiedsController < ApplicationController
     @classified.image = classified_params['image']
     @classified.views = classified_params['views']
     if @classified.save
-      @updated_classified = Classified.where(params[:id]).first
+      @updated_classified = Classified.where(id: params[:id]).first
       result = {status: 'success', classified: @updated_classified}
     end
     return result
